@@ -1,0 +1,66 @@
+{
+  "name": "react-base-arch",
+  "version": "1.0.0",
+  "description": "React base architecture",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development node server.js",
+    "build": "npm run build:es5 && npm run build:es6",
+    "build:es5": "cross-env NODE_ENV=cli babel ./src --out-dir es5",
+    "build:es6": "cross-env NODE_ENV=production babel ./src --out-dir es6",
+    "build:dist": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "watch:es5": "cross-env NODE_ENV=cli babel ./src -w --out-dir es5",
+    "watch:es6": "cross-env NODE_ENV=production babel ./src -w --out-dir es6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thinkingmik/react-base-arch.git"
+  },
+  "keywords": [
+    "react",
+    "webpack",
+    "sass",
+    "babel"
+  ],
+  "author": "Michele Andreoli <michi.andreoli@gmail.com> (https://github.com/thinkingmik)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thinkingmik/react-base-arch/issues"
+  },
+  "homepage": "https://github.com/thinkingmik/react-base-arch#readme",
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2016": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-optimize": "^1.0.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "cross-env": "^5.0.0",
+    "css-loader": "^0.28.1",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
+    "group-css-media-queries-loader": "^1.0.4",
+    "html-webpack-plugin": "^2.28.0",
+    "modernizr-webpack-plugin": "^1.0.5",
+    "node-sass": "^4.5.2",
+    "prop-types": "^15.5.10",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "sass-loader": "^6.0.5",
+    "strip-loader": "^0.1.2",
+    "style-loader": "^0.17.0",
+    "webpack": "^2.5.1",
+    "webpack-dashboard": "^0.4.0",
+    "webpack-dev-middleware": "^1.10.2",
+    "webpack-dev-server": "^2.4.5",
+    "webpack-hot-middleware": "^2.18.0"
+  }
+}
