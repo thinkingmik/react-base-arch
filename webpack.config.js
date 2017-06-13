@@ -38,7 +38,8 @@ module.exports = {
   // Various output options, to give us a single bundle.js file with everything resolved and concatenated
   output: {
     path: path.join(__dirname, '/build/dist/public'),
-    filename: 'bundle.js',
+    filename: '[chunkhash].js',
+		chunkFilename: '[chunkhash].js',
     pathinfo: true
   },
   // Where to resolve our loaders
@@ -76,16 +77,20 @@ module.exports = {
           ]
         })
       },
-      {
-        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot|html)$/,
-        use: ['file']
+			{
+        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        use: ['file?name=./assets/images/[name].[ext]']
       },
+			{
+				test: /\.(woff|woff2|ttf|eot)$/,
+        use: ['file?name=./assets/fonts/[name].[ext]']
+			},
       {
         test: /\.js$/,
         use: ['babel-loader', stripLogs],
         exclude: [/node_modules/]
       },
-    ],
+    ]
   },
   plugins: [
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: '"production"' } }),    
@@ -110,7 +115,10 @@ module.exports = {
       minimize: true,
       debug: false
     }),
-    new ExtractTextPlugin('layout.css'),
+    new ExtractTextPlugin({
+			filename: 'assets/layout.css',
+			allChunks: true
+		}),
     new HtmlWebpackPlugin({
       title: 'react-base-arch',
       filename: '../index.html',

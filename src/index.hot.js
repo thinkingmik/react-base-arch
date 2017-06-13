@@ -1,22 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
-import App from './App';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxPromise from 'redux-promise';
 
-const root = document.getElementById('reactOutput');
+import App from './components/app';
+import reducers from './reducers';
 
-ReactDOM.render((
-  <AppContainer>
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+
+ReactDOM.render(
+  <Provider store={createStoreWithMiddleware(reducers)}>
     <App />
-  </AppContainer>
-), root);
-
+  </Provider>
+  , document.querySelector('#reactOutput'));
+	
 if (module.hot) {
-  module.hot.accept('./App', () => {
-    ReactDOM.render((
-      <AppContainer>
-        <App />
-      </AppContainer>
-    ), root);
+  module.hot.accept('./components/app', () => {
+    ReactDOM.render(
+			<Provider store={createStoreWithMiddleware(reducers)}>
+				<App />
+			</Provider>
+			, document.querySelector('#reactOutput'));
   });
 }
+
